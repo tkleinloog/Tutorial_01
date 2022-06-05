@@ -17,6 +17,8 @@ public:
 	// Sets default values for this pawn's properties
 	AGameCharacter();
 
+	void MoveLeftRight(float movementDelta);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -27,6 +29,9 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* CameraMesh;
+
+	UPROPERTY(EditAnywhere, Category = "Character settings")
+	float MovementSpeed = 1.0f;
 
 public:	
 	// Called every frame

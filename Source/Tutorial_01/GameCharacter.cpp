@@ -16,7 +16,14 @@ AGameCharacter::AGameCharacter()
 	// Setup camera
 	Camera->FieldOfView = 120.f;
 	Camera->SetupAttachment(CameraMesh);
-	Camera->SetRelativeLocation(FVector(-100.0f, 0.0f, 50.0f));
+	Camera->SetRelativeLocation(FVector(-200.0f, 0.0f, 75.0f));
+}
+
+void AGameCharacter::MoveLeftRight(float movementDelta)
+{
+	FVector newLocation = GetActorLocation();
+	newLocation.Y += movementDelta * MovementSpeed;
+	SetActorLocation(newLocation);
 }
 
 // Called when the game starts or when spawned
@@ -38,5 +45,7 @@ void AGameCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	// Register for LR movement
+	PlayerInputComponent->BindAxis(TEXT("MoveLeftRight"), this, &AGameCharacter::MoveLeftRight);
 }
 
